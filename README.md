@@ -19,6 +19,6 @@ A ferramenta busca conectar pessoas por toda a região da UFRPE e proximidades, 
 </ul>
 <h2>Bibliotecas</h2>
 <p>
-Bibliotecas externas utilizadas:<br> <strong>Rich, Requests, python-dotenv</strong>
+Bibliotecas externas utilizadas:<br> <strong>Rich, Requests, python-dotenv, playsound3
 </p>
 <p>
