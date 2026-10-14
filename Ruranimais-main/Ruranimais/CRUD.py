@@ -183,6 +183,7 @@ def atualizar_dados(dados_usuario):
         rprint(f"[{vermelho}]===========================\n[/{vermelho}]")
         rprint(f"[{verde}][bold]Digite o comando destacado ou o número associado para prosseguir.[/bold][/{verde}]")
         rprint(f"1 - [{amarelo}]Deletar[/{amarelo}] conta\n")
+        rprint(f"2 - [{amarelo}]Voltar[/{amarelo}] pro menu\n")
         
         opcao = input("")
 
@@ -195,3 +196,6 @@ def atualizar_dados(dados_usuario):
             )
             if conta_deletada:
                 return True
+
+        if opcao.lower() == "Voltar" or opcao == "2":
+            break

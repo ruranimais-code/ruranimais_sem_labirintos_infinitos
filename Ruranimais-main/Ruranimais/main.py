@@ -9,6 +9,9 @@ import platform
 from CRUD import *
 from funcoes.besteira import mostrar_logo
 
+# Musiquinha eba !!
+from playsound3 import playsound
+playsound("musga_menu.mp3", False)
 
 # Criação e Conexão do Banco de Dados - SQlite
 import sqlite3
@@ -97,10 +100,11 @@ def menu_inicial():
                 time.sleep(2)
             else:
                 os.system(comando_de_limpeza)
-                if atualizar_dados(lista_dados_usuario):
+                if atualizar_dados(lista_dados_usuario): 
                     confirmacao_log.clear()
                     lista_dados_usuario = None
-            
+                else:
+                    rprint (f"[{amarelo}]Voltando...[/{amarelo}]")
 
         elif opcao.lower() == "sair" or opcao == "5":
             os.system(comando_de_limpeza)

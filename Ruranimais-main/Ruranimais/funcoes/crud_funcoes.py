@@ -88,7 +88,6 @@ def verificar_cpf(cpf):
     except ValueError as erro:
         return False, f"API retornou JSON inválido: {erro}"
 
-#LOG
 # Função pra verificar o codigo do email pra facilitar minha vida
 def verificar_codigo_email(email, enviar_email, finalidade):
     codigo = gerar_codigo_aleatorio()
@@ -125,6 +124,7 @@ def verificar_codigo_email(email, enviar_email, finalidade):
     rprint(f"\n❌[{vermelho}]Número máximo de tentativas atingido\nSolicite um novo código[/{vermelho}]")
     return False
 
+#LOG
 # Cria nova senha
 def recuperar_senha(dados_usuario):
     cpf_digitado = input("Digite seu CPF para confirmar sua identidade: ").strip()
@@ -179,13 +179,17 @@ def _campo_duplicado(nome_usuario=None, email=None, cpf=None):
 # ATUALIZAR
 # Por enquanto só tem pra deletar conta
 def deletar_usuario(email, nome_usuario, cpf, senha):
-    rprint(f"\n[{vermelho}]Deseja deletar sua conta?[/{vermelho}]")
-    deseja_deletar = input(
-        f"OBS.: Essa ação não pode ser desfeita!\n(s/n): "
-    ).strip().lower()
-    if deseja_deletar != "s":
-        print("Até a próxima :(")
-        return None
+    while True:
+        rprint(f"\n[{vermelho}]Deseja deletar sua conta?[/{vermelho}]")
+        deseja_deletar = input(
+            f"OBS.: Essa ação não pode ser desfeita!\n(s/n): "
+        ).strip().lower()
+        if deseja_deletar == "s":
+            break
+        if deseja_deletar == "n":
+            rprint(f"[{verde}]Ebaaa, sua conta continua intacta![/{verde}]")
+            return False
+        rprint(f"[{vermelho}]Opção inválida. Digite s ou n.[/{vermelho}]")
 
     # Pede informações usadas no login pra confirmar que usuário quer deletar conta
     email_digitado = input("Informe seu email para confirmar: ").strip()
@@ -194,8 +198,7 @@ def deletar_usuario(email, nome_usuario, cpf, senha):
         rprint(f"\n❌[{vermelho}]Email e/ou senha incorretos[/{vermelho}]\n\nNão foi possível deletar conta.")
         time.sleep(1)
         return None
-
-   # Vai atrás de deletar as informações do usuário
+ # Vai atrás de deletar as informações do usuário
     cursor.execute(
         """SELECT id FROM usuarios_ruranimais
            WHERE email = ? AND nome_usuario = ? AND cpf = ? AND senha = ?""",
